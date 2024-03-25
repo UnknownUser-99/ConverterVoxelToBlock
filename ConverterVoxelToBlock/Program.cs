@@ -22,17 +22,22 @@ namespace ConverterVoxelToBlock
                 VoxelModel voxelModel = new VoxelModel();
                 Building<DiggerBlock> building = new Building<DiggerBlock>();
 
-                OpenFile(voxelModel);
+                if (!OpenFile(voxelModel))
+                {
+                    Console.WriteLine();
+                    continue;
+                }
 
                 Convert(voxelModel, building);
 
                 SaveFile(building);
 
-                Console.ReadKey();
+                Console.WriteLine();
+                Console.ReadKey();                
             }
         }
 
-        static void OpenFile(VoxelModel voxelModel)
+        static bool OpenFile(VoxelModel voxelModel)
         {
             Console.WriteLine("Перетащите файл в консоль:");
 
@@ -51,6 +56,7 @@ namespace ConverterVoxelToBlock
             else
             {
                 Console.WriteLine("Неподдерживаемый формат файла");
+                return false;
             }
 
             if (openFactory != null)
@@ -58,6 +64,8 @@ namespace ConverterVoxelToBlock
                 IOpenFile openFile = openFactory.CreateOpenFile();
                 openFile.OpenFile(filePath, voxelModel);
             }
+
+            return true;
         }
 
         static void Convert(VoxelModel voxelModel, Building<DiggerBlock> building)

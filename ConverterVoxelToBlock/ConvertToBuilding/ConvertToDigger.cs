@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using ConverterVoxelToBlock.ColorConvert;
 
 namespace ConverterVoxelToBlock.ConvertToBuilding
 {
@@ -14,12 +15,13 @@ namespace ConverterVoxelToBlock.ConvertToBuilding
             try
             {
                 DiggerBlocks blocks = new DiggerBlocks();
+                ClosestColorFinder<DiggerBlock> colorFinder = new ClosestColorFinder<DiggerBlock>();
 
                 foreach (var voxel in voxelModel.GetVoxels())
                 {
                     Color voxelColor = voxel.color;
 
-                    DiggerBlock closestBlock = GetClosestColor(voxelColor, blocks);
+                    DiggerBlock closestBlock = colorFinder.GetClosestColor(voxelColor, blocks.Blocks);
 
                     if (closestBlock != null)
                     {
@@ -40,25 +42,6 @@ namespace ConverterVoxelToBlock.ConvertToBuilding
             {
                 Console.WriteLine($"Произошла ошибка при преобразовании в постройку: {ex.Message}");
             }
-        }
-
-        private DiggerBlock GetClosestColor(Color color, DiggerBlocks blocks)
-        {
-            ColorDistanceCalculator calculator = new ColorDistanceCalculator();
-            int closestType = -1;
-            double closestDistance = double.MaxValue;
-
-            foreach (var kvp in blocks.Blocks)
-            {
-                double distance = calculator.CalculateDistance(color, kvp.Value);
-                if (distance < closestDistance)
-                {
-                    closestType = kvp.Key;
-                    closestDistance = distance;
-                }
-            }
-
-            return closestType != -1 ? new DiggerBlock { blockType = closestType, blockKind = 0 } : null;
         }
     }
 }

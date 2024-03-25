@@ -50,6 +50,7 @@
     <Compile Include="Building\Block.cs" />
     <Compile Include="Building\DiggerBlocks.cs" />
     <Compile Include="Building\Building.cs" />
+    <Compile Include="ColorConvert\ClosestColorFinder.cs" />
     <Compile Include="ColorConvert\ColorDistanceCalculator.cs" />
     <Compile Include="ConvertToBuilding\ConvertToBuildingFactory.cs" />
     <Compile Include="ConvertToBuilding\ConvertToDigger.cs" />
