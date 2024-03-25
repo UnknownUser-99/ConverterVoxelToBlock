@@ -104,7 +104,6 @@ namespace ConverterVoxelToBlock
             { 129, Color.FromArgb(76, 49, 20) },
             { 130, Color.FromArgb(67, 52, 21) },
             { 131, Color.FromArgb(74, 50, 25) },
-            { 132, Color.FromArgb(142, 132, 115) },
             { 133, Color.FromArgb(66, 48, 18) },
             { 134, Color.FromArgb(73, 53, 21) },
             { 135, Color.FromArgb(71, 39, 19) },

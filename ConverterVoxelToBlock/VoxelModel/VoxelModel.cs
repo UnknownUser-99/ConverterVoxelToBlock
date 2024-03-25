@@ -10,6 +10,11 @@ namespace ConverterVoxelToBlock
     {
         private List<Voxel> voxels;
 
+        public int sizeX;
+        public int sizeY;
+        public int sizeZ;
+        public int totalVoxels;
+
         public VoxelModel()
         {
             voxels = new List<Voxel>();
