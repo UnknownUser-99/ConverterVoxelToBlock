@@ -15,25 +15,22 @@ namespace ConverterVoxelToBlock.ConvertToBuilding
             try
             {
                 DiggerBlocks blocks = new DiggerBlocks();
-                ClosestColorFinder<DiggerBlock> colorFinder = new ClosestColorFinder<DiggerBlock>();
+                ClosestColorFinder colorFinder = new ClosestColorFinder();
 
                 foreach (var voxel in voxelModel.GetVoxels())
                 {
                     Color voxelColor = voxel.color;
 
-                    DiggerBlock closestBlock = colorFinder.GetClosestColor(voxelColor, blocks.Blocks);
+                    int closestBlock = colorFinder.GetClosestColor(voxelColor, blocks.Blocks);
 
-                    if (closestBlock != null)
+                    building.AddBlock(new DiggerBlock
                     {
-                        building.AddBlock(new DiggerBlock
-                        {
-                            x = voxel.x,
-                            y = voxel.y,
-                            z = voxel.z,
-                            blockType = closestBlock.blockType,
-                            blockKind = closestBlock.blockKind
-                        });
-                    }
+                        x = voxel.x,
+                        y = voxel.y,
+                        z = voxel.z,
+                        blockType = closestBlock,
+                        blockKind = 0
+                    });
                 }
 
                 Console.WriteLine("Модель преобразована в постройку");

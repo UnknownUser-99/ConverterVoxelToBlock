@@ -7,9 +7,9 @@ using System.Drawing;
 
 namespace ConverterVoxelToBlock.ColorConvert
 {
-    public class ClosestColorFinder<T> where T : Block
+    public class ClosestColorFinder
     {
-        public T GetClosestColor(Color color, Dictionary<int, Color> blockColors)
+        public int GetClosestColor(Color color, Dictionary<int, Color> blockColors)
         {
             ColorDistanceCalculator calculator = new ColorDistanceCalculator();
 
@@ -26,7 +26,7 @@ namespace ConverterVoxelToBlock.ColorConvert
                 }
             }
 
-            return closestType != -1 ? Activator.CreateInstance<T>() : null;
+            return closestType;
         }
     }
 }
